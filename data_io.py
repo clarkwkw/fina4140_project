@@ -8,5 +8,4 @@ def read_yahoo_data(path):
 		dayfirst = True
 	)
 	df.rename(str.lower, axis='columns', inplace = True)
-	df["logprice"] = np.log(df["adj close"])
 	return df
