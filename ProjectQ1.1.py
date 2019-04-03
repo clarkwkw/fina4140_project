@@ -3,12 +3,12 @@ from data_io import read_yahoo_data
 from visualization.line_chart import LineChartBuilder
 
 def log_price_diff_calculator_factory():
-	cache = {"prev_price": np.NAN}
+	cache = {"prev_adj_close": np.NAN}
 	def applied(row):
 		result = None
-		if not np.isnan(cache["prev_price"]):
-			result = row["log close"] - cache["prev_price"]
-		cache["prev_price"] = row["log close"]
+		if not np.isnan(cache["prev_adj_close"]):
+			result = row["log adj close"] - cache["prev_adj_close"]
+		cache["prev_adj_close"] = row["log adj close"]
 		return result
 
 	return applied
@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
 	line_chart_builder.add_series(
 		x = None, 
-		series = stock_df["close"]
+		series = stock_df["adj close"]
 	)
 	line_chart_builder.set_xticks([])
 	line_chart_builder.set_x_axis_label("Time")
@@ -28,13 +28,11 @@ if __name__ == "__main__":
 	line_chart_builder.show()
 
 	stock_df["log adj close"] = np.log(stock_df["adj close"])
-	stock_df["log close"] = np.log(stock_df["close"])
-
 	log_price_diff_calculator = log_price_diff_calculator_factory()
 
-	diff_log_prices = stock_df.apply(log_price_diff_calculator, axis = 1, reduce = True).drop(0)
+	diff_log_prices = stock_df.apply(log_price_diff_calculator, axis = 1,  result_type='reduce').drop(0)
 
-	volatility = np.sqrt(np.var(diff_log_prices, ddof = 1)*360)
+	volatility = np.std(diff_log_prices, ddof = 1)*np.sqrt(360)
 	annualized_return = np.mean(diff_log_prices) + 0.5*volatility*volatility
 	print("mu: ", annualized_return)
 	print("sigma: ", volatility)
