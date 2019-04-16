@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
 	diff_log_prices = stock_df.apply(log_price_diff_calculator, axis = 1,  result_type='reduce').drop(0)
 
-	volatility = np.std(diff_log_prices, ddof = 1)*np.sqrt(360)
+	volatility = np.std(diff_log_prices, ddof = 1)*np.sqrt(250)
 	annualized_return = np.mean(diff_log_prices) + 0.5*volatility*volatility
 	print("mu: ", annualized_return)
 	print("sigma: ", volatility)
