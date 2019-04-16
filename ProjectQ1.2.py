@@ -4,9 +4,10 @@ from data_io import read_yahoo_data
 from visualization.line_chart import LineChartBuilder
 
 delta_t = 1/250 #day
-n_trajectory = 10
+n_trajectory = 1000
 n_step = 250
 summary_file = "simulation_summary.csv"
+trajectory_file = "trajectory.csv"
 
 def generate_trajectory(mu, sigma, init_price, delta_t, n_step, n_trajectory):
 	sigma_dw = np.random.normal(size = (n_trajectory, n_step)) * np.sqrt(delta_t) * sigma
@@ -45,9 +46,12 @@ if __name__ == "__main__":
 
 	print("Simulation summary is saved as %s"%summary_file)
 
+	pandas.DataFrame(trajectory.T).to_csv(trajectory_file)
+	print("Tajectory file is saved as %s"%trajectory_file)
+
 	line_chart_builder = LineChartBuilder()
 
-	for i in range(n_trajectory):
+	for i in range(10):
 		line_chart_builder.add_series(
 			x = None, 
 			series = trajectory[i, :]
