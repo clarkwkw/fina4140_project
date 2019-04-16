@@ -4,7 +4,6 @@ from ProjectQ1_2 import generate_trajectory
 
 Ms = [4, 8, 16, 32]
 r = 0.03
-mu = 0.032046941294592554
 sigma = 0.2494361491753742
 delta_t = 1/250
 T = 1
@@ -22,7 +21,7 @@ def monte_carlo(exercise_price, r, t, call_or_put, n):
 	if call_or_put not in ["call", "put"]:
 		raise Exception("call_or_put must be either 'call' or 'put'")
 	
-	final_prices = generate_trajectory(mu, sigma, S, delta_t, n_step, n)[:, -1]
+	final_prices = generate_trajectory(r, sigma, S, delta_t, n_step, n)[:, -1]
 
 	payoff = 0
 	if call_or_put == "call":
