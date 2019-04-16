@@ -31,11 +31,11 @@ if __name__ == "__main__":
 	r = 0.03
 	sigma = 0.2494361491753742
 	tau = 1
-	print(bs_formula(s, s, r, 0, sigma, tau, "call"))
-	print(bs_formula(s, 1.1*s, r, 0, sigma, tau, "call"))
-	print(bs_formula(s, 1.1*s, r, 0.01, sigma, tau, "call"))
-	print(bs_formula(s, 0.9*s, r, 0, sigma, tau, "call"))
-	print(bs_formula(s, s, r, 0, sigma, tau, "put"))
-	print(bs_formula(s, 1.1*s, r, 0, sigma, tau, "put"))
-	print(bs_formula(s, 1.1*s, r, 0.01, sigma, tau, "put"))
-	print(bs_formula(s, 0.9*s, r, 0, sigma, tau, "put"))
+	print("1:", bs_formula(s, s, r, 0, sigma, tau, "call"))
+	print("2:", bs_formula(s, 1.1*s, r, 0, sigma, tau, "call"))
+	print("3:", bs_formula(s, 1.1*s, r, 0.01, sigma, tau, "call"))
+	print("4:", bs_formula(s, 0.9*s, r, 0, sigma, tau, "call"))
+	print("5:", bs_formula(s, s, r, 0, sigma, tau, "put"))
+	print("6:", bs_formula(s, 1.1*s, r, 0, sigma, tau, "put"))
+	print("7:", bs_formula(s, 1.1*s, r, 0.01, sigma, tau, "put"))
+	print("8:", bs_formula(s, 0.9*s, r, 0, sigma, tau, "put"))
